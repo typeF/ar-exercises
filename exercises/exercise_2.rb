@@ -3,5 +3,10 @@ require_relative './exercise_1'
 
 puts "Exercise 2"
 puts "----------"
+@store1 = Store.find(1)
+@store2 = Store.find(2)
 
-# Your code goes here ...
+@store1.name = "Vancouver"
+@store1.save
+
+puts Store.count
