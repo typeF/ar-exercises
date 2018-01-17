@@ -10,6 +10,16 @@ class Store < ActiveRecord::Base
   validates :annual_revenue, numericality: {greater_than_or_equal_to: 0, only_integer: true }
   validate :carries_an_apparel_type?
 
+  before_destroy :is_store_empty?
+
+  private
+
+  def is_store_empty?
+    if self.employees.size > 0
+      return false
+    end
+  end
+
   def carries_an_apparel_type?
     if mens_apparel == nil && womens_apparel == nil
       puts errors.add(:womens_apparel, "Apparel type cannot be empty")
